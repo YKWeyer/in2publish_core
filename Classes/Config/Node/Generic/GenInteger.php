@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace In2code\In2publishCore\Config\Node\Generic;
 
 /*
@@ -28,6 +30,7 @@ namespace In2code\In2publishCore\Config\Node\Generic;
  */
 
 use In2code\In2publishCore\Config\ValidationContainer;
+
 use function is_int;
 use function reset;
 
@@ -56,7 +59,8 @@ class GenInteger extends AbsGenNode
     {
         $tmp = [];
         foreach ($value as $key => $var) {
-            $valueNode = reset($this->nodes);
+            $nodes = $this->nodes->getArrayCopy();
+            $valueNode = reset($nodes);
             $casted = $valueNode->cast($var);
             $tmp[(int)$key] = $casted;
             unset($value[$key]);

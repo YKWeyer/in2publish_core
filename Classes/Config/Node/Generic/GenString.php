@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace In2code\In2publishCore\Config\Node\Generic;
 
 /*
@@ -28,6 +30,7 @@ namespace In2code\In2publishCore\Config\Node\Generic;
  */
 
 use In2code\In2publishCore\Config\ValidationContainer;
+
 use function is_string;
 use function reset;
 
@@ -56,7 +59,8 @@ class GenString extends AbsGenNode
     {
         $tmp = [];
         foreach ($value as $key => $var) {
-            $tmp[(string)$key] = reset($this->nodes)->cast($var);
+            $nodes = $this->nodes->getArrayCopy();
+            $tmp[(string)$key] = reset($nodes)->cast($var);
             unset($value[$key]);
         }
         return $tmp;
